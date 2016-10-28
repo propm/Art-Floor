@@ -3,7 +3,9 @@ int season;
 int SIZE = 20;
 Ripple[] ripples = new Ripple[SIZE];
 Clack[] clacks = new Clack[SIZE];
-
+Client[] client=new Client[10];
+float[] x=new float[5];
+float[] y=new float[5];
 PImage back, hibi;
 
 void setup(){
@@ -16,8 +18,20 @@ void setup(){
   // Connect to the local machine at port 5204.
   // This example will not run if you haven't
   // previously started a server on this port.
-  myClient = new Client(this, "127.0.0.1", 5204);
-  
+    client[0] = new Client(this, "127.0.0.1", 1002);
+    client[1] = new Client(this, "127.0.0.1", 1001);
+    
+    client[2] = new Client(this, "127.0.0.1", 2002);
+    client[3] = new Client(this, "127.0.0.1", 2001);
+    
+    client[4] = new Client(this, "127.0.0.1", 3002);
+    client[5] = new Client(this, "127.0.0.1", 3001);
+    
+    client[6] = new Client(this, "127.0.0.1", 4002);
+    client[7] = new Client(this, "127.0.0.1", 4001);
+    
+    client[8] = new Client(this, "127.0.0.1", 5002);
+    client[9] = new Client(this, "127.0.0.1", 5001);  
 
   for(int i=0;i<SIZE;i++) {
     ripples[i] = new Ripple();
@@ -56,12 +70,14 @@ void springDraw(){
     }
   }
   //Client
-  if (myClient.available() >= 8) { 
-    X=readInt();
-    Y=readInt();
+  if (myClient.available() >= 8) {
+    for(int i=0; i<5; i++){
+      X[i]=readInt();
+      Y[i]=readInt();
+    }
     println(X+","+Y);
   }
-  ellipse(X, Y, 10, 10);
+  //ellipse(X, Y, 10, 10);
   ripples[0].init(X,Y,random(5,10),int(random(190,220)));
 }
 
@@ -116,12 +132,12 @@ void winterDraw(){
   }
   //Client
   if (myClient.available() >= 8) { 
-  X=readInt();
-  Y=readInt();
-  println(X+","+Y);
+    X=readInt();
+    Y=readInt();
+    println(X+","+Y);
   }
-  ellipse(X, Y, 10, 10);
-  clacks[0].init(X,Y,random(5,10),int(random(100,170)));
+  ellipse(int(X), int(Y), 10, 10);
+  clacks[0].init(int(X),int(Y),random(5,10),int(random(100,170)));
 }
 
 void mousePressed() {

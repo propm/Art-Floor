@@ -46,6 +46,8 @@ public class Ripple{
       strokeWeight(1);
       ellipse(x,y,dia*0.6,dia*0.6);
     }
+    
+    delay(100);
   }
 
   public void move() {
