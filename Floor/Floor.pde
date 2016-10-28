@@ -8,6 +8,7 @@ float[] x=new float[5];
 float[] y=new float[5];
 PImage back, hibi;
 
+
 void setup(){
   season=0; 
   colorMode(HSB,360,100,100);
@@ -44,6 +45,9 @@ void setup(){
 }
 
 void draw(){
+  //Cilent
+  GetData();
+  setPosition();
    switch(season){
      case 1:
        springDraw();
@@ -69,16 +73,12 @@ void springDraw(){
       ripples[i].rippleDraw();
     }
   }
-  //Client
-  if (myClient.available() >= 8) {
-    for(int i=0; i<5; i++){
-      X[i]=readInt();
-      Y[i]=readInt();
-    }
-    println(X+","+Y);
-  }
   //ellipse(X, Y, 10, 10);
-  ripples[0].init(X,Y,random(5,10),int(random(190,220)));
+  if(millis() % 1000 == 0){
+    for(int i = 0; i < 5; i++){
+      ripples[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(190,220)));
+    }
+  }
 }
 
 void summerDraw(){
@@ -90,14 +90,12 @@ void summerDraw(){
       ripples[i].rippleDraw();
     }
   }
-  //Client
-  if (myClient.available() >= 8) { 
-    X=readInt();
-    Y=readInt();
-    println(X+","+Y);
+  //ellipse(X, Y, 10, 10);
+  if(millis() % 1000 == 0){
+    for(int i = 0; i < 5; i++){
+      ripples[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(190,220)));
+    }
   }
-  ellipse(X, Y, 10, 10);
-  ripples[0].init(X,Y,random(5,10),int(random(190,220)));
 }
 
 void fallDraw(){
@@ -110,14 +108,12 @@ void fallDraw(){
       clacks[i].clackDraw();
     }
   }
-  //Client
-  if (myClient.available() >= 8) { 
-  X=readInt();
-  Y=readInt();
-  println(X+","+Y);
+  //ellipse(X, Y, 10, 10);
+  if(millis() % 1000 == 0){
+    for(int i = 0; i < 5; i++){
+      clacks[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(100,170)));
+    }
   }
-  ellipse(X, Y, 10, 10);
-  clacks[0].init(X,Y,random(5,10),int(random(100,170)));
 }
 
 void winterDraw(){
@@ -130,14 +126,12 @@ void winterDraw(){
       clacks[i].clackDraw();
     }
   }
-  //Client
-  if (myClient.available() >= 8) { 
-    X=readInt();
-    Y=readInt();
-    println(X+","+Y);
+  //ellipse(int(X), int(Y), 10, 10);
+  if(millis() % 1000 == 0){
+    for(int i = 0; i < 5; i++){
+      clacks[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(100,170)));
+    }
   }
-  ellipse(int(X), int(Y), 10, 10);
-  clacks[0].init(int(X),int(Y),random(5,10),int(random(100,170)));
 }
 
 void mousePressed() {
