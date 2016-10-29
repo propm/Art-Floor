@@ -3,13 +3,19 @@ void Set(){
     case 1:
     imageMode(CORNER);
     back = loadImage("stone.jpg");
+    back.resize(width,height);
+    sakura.resize(30, 30);
+    suimen.resize(width, height);
     FRICTION = 0.985;
     break;
     
     case 2:
     imageMode(CORNER);
-    back = loadImage("summer.png");
-    back.resize(width,height);
+    TIME[0] = 0;
+    TIME[1] = 150;
+    TIME[2] = 150;
+    //back = loadImage("summer.png");
+    //back.resize(width,height);
     break;
     
     case 3:

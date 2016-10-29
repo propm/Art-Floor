@@ -9,7 +9,7 @@ void setPosition(){
   for(int i=0;i<5;i++){
      X[i] = width*x[i];
      Y[i] = height*y[i];
-    }
+  }
 }
 void GetData(){
  // while(client[0].available()+client[1].available()+client[2].available()+client[3].available()+client[4].available()+client[5].available()+client[6].available()+client[7].available()+client[8].available()+client[9].available() <= 40){
