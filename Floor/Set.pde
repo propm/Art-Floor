@@ -1,4 +1,4 @@
-void Set(){
+   void Set(){
   switch(season){
     case 1:
     imageMode(CORNER);
@@ -10,7 +10,7 @@ void Set(){
     break;
     
     case 2:
-    imageMode(CORNER);
+    imageMode(CENTER);
     TIME[0] = 0;
     TIME[1] = 150;
     TIME[2] = 150;
@@ -19,7 +19,7 @@ void Set(){
     break;
     
     case 3:
-    imageMode(CORNER);
+    imageMode(CENTER);
     back = loadImage("leaves.jpg");
     back.resize(width,height);
     hibi = loadImage("leave.png");

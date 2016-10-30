@@ -1,13 +1,14 @@
 //Set...kirikaetatokini itidodake kisetugotono settei
 int season;
-int SIZE = 20;
+int SIZE = 50;
+int Levx, Levy;
 Ripple[] ripples = new Ripple[SIZE];
 Clack[] clacks = new Clack[SIZE];
 Client[] client=new Client[10];
 float[] x=new float[5];
 float[] y=new float[5];
 PImage back, hibi, sakura, suimen;
-
+PImage[] leaves;
 
 void setup(){
   season=0; 
@@ -34,6 +35,11 @@ void setup(){
     client[8] = new Client(this, "127.0.0.1", 5002);
     client[9] = new Client(this, "127.0.0.1", 5001);  
 
+  leaves = new PImage[29];
+  for(int j=1;j<leaves.length;j++){
+    leaves[j-1]=loadImage("落ち葉_"+j+".png"); 
+  }
+  Happa = new ArrayList<leave>();
   Arei = new ArrayList<sakura>();
   king = new ArrayList<kingyo>();
   for(int i=0;i<SIZE;i++) {
@@ -98,12 +104,13 @@ void springDraw(){
 
 void summerDraw(){
   background(0);
-  image(back,0,0);  
+  println(frameRate);
+  image(back,width/2,height/2);  
+  image(suimen, width/2, height/2);
   for (int i = 0; i < king.size(); i++) {
     kingyo tmp = king.get(i);
     tmp.Draw();
   }
-  image(suimen, 0, 0);
   for(int i=0;i<SIZE;i++) {
     if(ripples[i].getFlag()) {
       ripples[i].move();
@@ -111,7 +118,7 @@ void summerDraw(){
     }
   }
   //ellipse(X, Y, 10, 10);
-  if(millis() % 1000 == 0){
+  if(millis() % 30 == 0){
     for(int i = 0; i < 5; i++){
       ripples[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(190,220)));
     }
@@ -121,17 +128,15 @@ void summerDraw(){
 void fallDraw(){
   background(0);
   noTint();
-  image(back, 0, 0);
-  for(int i=0;i<SIZE;i++) {
-    if(clacks[i].getFlag()) {
-      clacks[i].move();
-      clacks[i].clackDraw();
-    }
+  image(back, width/2, height/2);
+  for(int j=1;j<leaves.length;j++){
+    leaves[j-1]=loadImage("落ち葉_"+j+".png"); 
   }
-  //ellipse(X, Y, 10, 10);
-  if(millis() % 1000 == 0){
+  if(millis() % 30 == 0){
     for(int i = 0; i < 5; i++){
-      clacks[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(100,170)));
+        Levx = int(X[i]);
+        Levy = int(Y[i]);
+        Happa.add(new leave());
     }
   }
 }
@@ -146,8 +151,7 @@ void winterDraw(){
       clacks[i].clackDraw();
     }
   }
-  //ellipse(int(X), int(Y), 10, 10);
-  if(millis() % 1000 == 0){
+  if(millis() % 30 == 0){
     for(int i = 0; i < 5; i++){
       clacks[i].init(int(X[i]),int(Y[i]),random(5,10),int(random(100,170)));
     }
@@ -171,10 +175,9 @@ void mousePressed() {
       break;
       
     case 3:
-      for(int i=SIZE-1;i>0;i--) {
-        clacks[i] = new Clack(clacks[i-1]);
-      }
-      clacks[0].init(mouseX,mouseY,random(5,10),int(random(100,170)));
+      Levx = mouseX;
+      Levy = mouseY;
+      Happa.add(new leave());
       break;
 
     case 4:
